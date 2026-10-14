@@ -38,6 +38,8 @@
   --ring-track: rgba(255, 255, 255, .08);
   --shadow: 0 10px 30px rgba(0, 0, 0, .45);
   --felt: radial-gradient(120% 80% at 50% -10%, #134636 0%, #0b1d17 55%, #07120e 100%);
+  --suit-black-ui: #e8e2cf;
+  --suit-red-ui: #ff7b7b;
 }
 
 :root[data-theme='light'] {
@@ -59,6 +61,8 @@
   --felt: radial-gradient(120% 80% at 50% -10%, #fbf8ef 0%, #f4f0e6 60%, #ece6d6 100%);
   --back-1: #145a43;
   --back-2: #0e4232;
+  --suit-black-ui: #15181c;
+  --suit-red-ui: #c62828;
 }
 
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -148,7 +152,7 @@ small, .muted { color: var(--muted); }
 .bottomnav svg { transition: transform .25s var(--ease); }
 .bottomnav button.on svg { transform: translateY(-1px) scale(1.08); }
 @media (min-width: 900px) {
-  .bottomnav { left: 50%; transform: translateX(-50%); bottom: 16px; width: 560px; border-radius: 22px; border: 1px solid var(--line); height: var(--nav-h); padding: 0; box-shadow: var(--shadow); }
+  .bottomnav { background: var(--bg-2); left: 50%; transform: translateX(-50%); bottom: 16px; width: 560px; border-radius: 22px; border: 1px solid var(--line); height: var(--nav-h); padding: 0; box-shadow: var(--shadow); }
 }
 
 /* ---------- Kort/flader ---------- */
@@ -205,7 +209,7 @@ small, .muted { color: var(--muted); }
 }
 .input:focus { border-color: var(--gold); }
 textarea.input { min-height: 110px; resize: vertical; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9rem; }
-label.field { display: flex; flex-direction: column; gap: 6px; font-size: .85rem; color: var(--muted); font-weight: 600; }
+.field { display: flex; flex-direction: column; gap: 6px; font-size: .85rem; color: var(--muted); font-weight: 600; }
 .row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 4px; min-height: 56px; border-bottom: 1px solid var(--line-2); }
 .row:last-child { border-bottom: 0; }
 .row-text { display: flex; flex-direction: column; }
@@ -262,9 +266,9 @@ label.field { display: flex; flex-direction: column; gap: 6px; font-size: .85rem
 .dialog-actions { display: flex; gap: 10px; justify-content: flex-end; }
 
 /* ---------- Toast ---------- */
-.toast-wrap { position: fixed; left: 0; right: 0; bottom: calc(var(--nav-h) + var(--safe-b) + 12px); display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 80; pointer-events: none; padding: 0 16px; }
+.toast-wrap { position: fixed; left: 0; right: 0; top: calc(var(--safe-t) + 64px); display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 80; pointer-events: none; padding: 0 16px; }
 .toast { background: var(--navy); color: #fff; border: 1px solid rgba(212, 175, 55, .4); padding: 12px 16px; border-radius: 14px; box-shadow: var(--shadow); animation: toast-in .3s var(--ease); max-width: 440px; font-weight: 600; pointer-events: auto; display: flex; gap: 10px; align-items: center; }
-@keyframes toast-in { from { transform: translateY(16px); opacity: 0; } }
+@keyframes toast-in { from { transform: translateY(-16px); opacity: 0; } }
 .confetti-canvas { position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 90; }
 
 /* ---------- Spillekort ---------- */
@@ -363,6 +367,7 @@ label.field { display: flex; flex-direction: column; gap: 6px; font-size: .85rem
 
 /* Heatmap 4×13 */
 .heatmap { display: grid; grid-template-columns: 26px repeat(13, 1fr); gap: 3px; }
+.heatmap .hm-cell.unseen { color: var(--muted); }
 .heatmap .hm-cell { aspect-ratio: 1; border-radius: 6px; border: 0; display: grid; place-items: center; font-size: .62rem; font-weight: 800; color: rgba(0,0,0,.75); padding: 0; min-height: 22px; }
 .heatmap .hm-label { display: grid; place-items: center; font-size: .7rem; color: var(--muted); }
 

@@ -128,9 +128,9 @@ function RangeSetup({ onStart }: { onStart: (from: number, to: number) => void }
       <Page>
         <p className="muted">{t('rangeIntro')}</p>
         <div className="card stack-v gap-top">
-          <label className="field">{t('rangeLength')}
+          <div className="field">{t('rangeLength')}
             <Segmented value={len} onChange={(v) => { setLen(v); setFrom(Math.min(from, 53 - v)); }} options={[5, 10, 13, 20].map((n) => ({ value: n, label: String(n) }))} />
-          </label>
+          </div>
           <label className="field">{t('rangeFrom', { from, to })}
             <input type="range" min={1} max={53 - len} value={from} onChange={(e) => setFrom(Number(e.target.value))} style={{ width: '100%', accentColor: 'var(--gold)', minHeight: 44 }} />
           </label>

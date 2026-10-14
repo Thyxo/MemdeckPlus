@@ -68,14 +68,14 @@ export function CheatSheets() {
           <div className="card flat gap-top" style={{ overflowX: 'auto' }}>
             <table className="table" style={{ textAlign: 'center' }}>
               <thead>
-                <tr><th />{SUITS.map((s) => <th key={s} style={{ textAlign: 'center' }}><SuitIcon suit={s} size={22} /></th>)}</tr>
+                <tr><th />{SUITS.map((s) => <th key={s} style={{ textAlign: 'center' }}><SuitIcon suit={s} size={22} color={s === 'H' || s === 'D' ? 'var(--suit-red-ui)' : 'var(--suit-black-ui)'} /></th>)}</tr>
               </thead>
               <tbody>
                 {RANKS.map((r) => (
                   <tr key={r}>
                     <th style={{ fontSize: '1rem', color: 'var(--text)' }}>{rankLabel(r, danish ? 'da' : 'en')}</th>
                     {SUITS.map((s) => (
-                      <td key={s} style={{ textAlign: 'center', fontWeight: 800, fontSize: '1.1rem', color: s === 'H' || s === 'D' ? 'var(--card-red)' : undefined }}>
+                      <td key={s} style={{ textAlign: 'center', fontWeight: 800, fontSize: '1.1rem', color: s === 'H' || s === 'D' ? 'var(--suit-red-ui)' : undefined }}>
                         {posOf.get(`${r}${s}` as CardId) ?? '–'}
                       </td>
                     ))}

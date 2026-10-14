@@ -75,12 +75,12 @@ export function Stats() {
             {RANKS.map((r) => <span key={r} className="hm-label">{rankLabel(r, lang)}</span>)}
             {SUITS.map((su) => (
               <div key={su} style={{ display: 'contents' }} role="row">
-                <span className="hm-label"><SuitIcon suit={su} size={16} /></span>
+                <span className="hm-label"><SuitIcon suit={su} size={16} color={su === 'H' || su === 'D' ? 'var(--suit-red-ui)' : 'var(--suit-black-ui)'} /></span>
                 {RANKS.map((r) => {
                   const c = `${r}${su}` as CardId;
                   const st = cardStats(srs, c);
                   return (
-                    <button key={c} className="hm-cell" style={{ background: heatColor(st.strength, st.seen > 0) }} onClick={() => setSel(c)}
+                    <button key={c} className={`hm-cell ${st.seen ? '' : 'unseen'}`} style={{ background: heatColor(st.strength, st.seen > 0) }} onClick={() => setSel(c)}
                       aria-label={`${c}: ${Math.round(st.strength * 100)}%`}>{posOf.get(c)}</button>
                   );
                 })}

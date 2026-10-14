@@ -87,9 +87,9 @@ export function Palaces() {
               <span className="navrow-text"><b>{x.label}</b>{x.n > 0 && <small>{t('nStops', { n: x.n })}</small>}</span>
             </button>
           ))}
-          <label className="field">{t('cardsPerStop')}
+          <div className="field">{t('cardsPerStop')}
             <Segmented value={per} onChange={setPer} options={[{ value: 3, label: '3' }, { value: 4, label: '4' }]} />
-          </label>
+          </div>
           <small className="muted">{t('stopsNeeded', { n: Math.ceil(52 / per) })}</small>
         </div>
       </Sheet>

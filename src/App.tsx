@@ -52,7 +52,7 @@ function Screen({ parts }: { parts: string[] }) {
     case 'train':
       return b ? <TrainSession key={b + (c ?? '')} mode={b} /> : <TrainHub />;
     case 'learn':
-      if (b === 'build') return <BuildStack />;
+      if (b === 'build') return <BuildStack chunk={c !== undefined ? Number(c) : undefined} />;
       if (b === 'images') return <ImagesScreen />;
       if (b === 'patterns') return <Patterns />;
       if (b === 'palace') return c ? <PalaceEditor id={c} /> : <Palaces />;
@@ -148,7 +148,7 @@ export function App() {
   if (!state.settings.onboarded) return (<><Onboarding /><DialogHost /></>);
 
   const top = parts[0] ?? '';
-  const hideNav = (top === 'train' && !!parts[1]) || (top === 'tools' && ['setup', 'lookup'].includes(parts[1] ?? ''));
+  const hideNav = (top === 'train' && !!parts[1]) || (top === 'learn' && parts[1] === 'build' && parts[2] !== undefined) || (top === 'tools' && ['setup', 'lookup'].includes(parts[1] ?? ''));
   const activeTab = TABS.find((x) => x.id === top)?.id ?? (top === 'stats' || top === 'settings' ? '' : '');
 
   return (

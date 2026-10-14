@@ -47,8 +47,7 @@ export function ImageEditorSheet({ card, onClose }: { card: CardId | null; onClo
     setQ(IMAGE_SUGGESTIONS[card].q);
     setHits(null);
     setError(null);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [card]);
+  }, [card]); // nulstil kun når et nyt kort åbnes
 
   if (!card) return null;
   const sugg = suggestionFor(card, lang);

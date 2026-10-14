@@ -53,9 +53,9 @@ export function FullOrder() {
         <Page>
           <p className="muted">{t('fullIntro')}</p>
           <div className="card stack-v gap-top">
-            <label className="field">{t('howMany')}
+            <div className="field">{t('howMany')}
               <Segmented value={count} onChange={setCount} options={[13, 26, 52].map((n) => ({ value: n, label: String(n) }))} />
-            </label>
+            </div>
             <div className="btn-row">
               <button className="btn primary big" onClick={() => { finishedRef.current = false; lastT.current = 0; t0.current = performance.now(); setStart(1); }}>
                 <Icon name="play" /> {t('startFrom', { n: 1 })}

@@ -3,6 +3,7 @@
  * og testes; ved ≥ 90 % rigtige låses næste bid op.
  */
 import { useRef, useState } from 'react';
+import { back, navigate } from '../../lib/router';
 import { ImageThumb } from '../../components/CardImageView';
 import { Icon } from '../../components/Icon';
 import { useActive } from '../../components/StackSelect';
@@ -19,46 +20,48 @@ import { ImageEditorSheet } from './ImageEditor';
 
 const PASS = 0.9;
 
-export function BuildStack() {
+export function BuildStack({ chunk }: { chunk?: number }) {
   const t = useT();
   const { state, stack, order } = useActive();
   const lp = state.learn[stack.id] ?? { chunkSize: 8, passed: [] };
   const size = lp.chunkSize;
   const chunks = Math.ceil(52 / size);
-  const [open, setOpen] = useState<number | null>(null);
-
-  if (open !== null) return <ChunkStudy key={open} idx={open} size={size} onClose={() => setOpen(null)} onNext={() => setOpen(open + 1 < chunks ? open + 1 : null)} />;
-
   const unlocked = (i: number) => i === 0 || lp.passed.includes(i - 1) || lp.passed.includes(i);
+
+  if (chunk !== undefined && chunk >= 0 && chunk < chunks && unlocked(chunk)) {
+    return <ChunkStudy key={chunk} idx={chunk} size={size}
+      onClose={() => back('/learn/build')}
+      onNext={() => navigate(chunk + 1 < chunks ? `/learn/build/${chunk + 1}` : '/learn/build', true)} />;
+  }
 
   return (
     <>
       <TopBar title={t('buildTheStack')} backTo="/learn" sub={stack.name} />
       <Page>
         <p className="muted">{t('buildIntro')}</p>
-        <label className="field gap-top">{t('chunkSize')}
+        <div className="field gap-top">{t('chunkSize')}
           <Segmented value={size} onChange={async (v) => {
             if (v === size) return;
             if (lp.passed.length && !(await confirmDialog({ title: t('changeChunkQ'), body: t('changeChunkBody') }))) return;
             actions.setChunkSize(stack.id, v);
           }} options={[5, 6, 8, 10].map((n) => ({ value: n, label: t('nCards', { n }) }))} />
-        </label>
+        </div>
         <div className="navlist gap-top">
           {Array.from({ length: chunks }, (_, i) => {
             const from = i * size + 1;
             const to = Math.min(52, from + size - 1);
             const passed = lp.passed.includes(i);
-            const open = unlocked(i);
+            const isOpen = unlocked(i);
             return (
-              <button key={i} className="navrow" disabled={!open} onClick={() => { sfx.tap(); setOpen(i); }} style={{ opacity: open ? 1 : 0.55 }}>
-                <span className="navrow-icon">{passed ? '✓' : open ? i + 1 : '🔒'}</span>
+              <button key={i} className="navrow" disabled={!isOpen} onClick={() => { sfx.tap(); navigate(`/learn/build/${i}`); }} style={{ opacity: isOpen ? 1 : 0.55 }}>
+                <span className="navrow-icon">{passed ? '✓' : isOpen ? i + 1 : '🔒'}</span>
                 <span className="navrow-text">
                   <b>{t('chunkN', { n: i + 1 })} · #{from}–{to}</b>
                   <span className="chip-row" style={{ marginTop: 4 }}>
-                    {order.slice(from - 1, to).map((c) => <CardChip key={c} card={open ? c : null} size="sm" />)}
+                    {order.slice(from - 1, to).map((c) => <CardChip key={c} card={isOpen ? c : null} size="sm" />)}
                   </span>
                 </span>
-                {passed ? <span className="pill ok">{t('passed')}</span> : open ? <Icon name="chevron" className="muted" /> : null}
+                {passed ? <span className="pill ok">{t('passed')}</span> : isOpen ? <Icon name="chevron" className="muted" /> : null}
               </button>
             );
           })}

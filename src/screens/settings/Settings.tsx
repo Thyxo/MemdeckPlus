@@ -29,12 +29,12 @@ export function SettingsScreen() {
       <Page>
         <div className="section-title">{t('general')}</div>
         <div className="card flat stack-v">
-          <label className="field">{t('language')}
+          <div className="field">{t('language')}
             <Segmented value={s.lang} onChange={(v) => set({ lang: v })} options={[{ value: 'da', label: '🇩🇰 Dansk' }, { value: 'en', label: '🇬🇧 English' }]} />
-          </label>
-          <label className="field">{t('theme')}
+          </div>
+          <div className="field">{t('theme')}
             <Segmented value={s.theme} onChange={(v) => set({ theme: v })} options={[{ value: 'dark', label: t('themeDark') }, { value: 'light', label: t('themeLight') }, { value: 'system', label: t('themeSystem') }]} />
-          </label>
+          </div>
           <Toggle checked={s.haptics} onChange={(v) => set({ haptics: v })} label={t('haptics')} desc={'vibrate' in navigator ? t('hapticsDesc') : t('hapticsUnsupported')} />
           <Toggle checked={s.sound} onChange={(v) => set({ sound: v })} label={t('sound')} desc={t('soundDesc')} />
           <Toggle checked={s.danishRanks} onChange={(v) => set({ danishRanks: v })} label={t('danishRanks')} desc={t('danishRanksDesc')} />
@@ -42,18 +42,18 @@ export function SettingsScreen() {
 
         <div className="section-title">{t('training')}</div>
         <div className="card flat stack-v">
-          <label className="field">{t('defaultDirection')}
+          <div className="field">{t('defaultDirection')}
             <Segmented value={s.direction} onChange={(v) => set({ direction: v })} options={[{ value: 'c2p', label: t('dirC2PShort') }, { value: 'p2c', label: t('dirP2CShort') }, { value: 'both', label: t('dirBothShort') }]} />
-          </label>
+          </div>
           <div className="row"><span className="row-text"><span>{t('dailyGoal')}</span><small>{t('dailyGoalDesc')}</small></span><Stepper value={s.dailyGoal} min={10} max={300} step={10} onChange={(v) => set({ dailyGoal: v })} /></div>
           <div className="row"><span>{t('sessionSize')}</span><Stepper value={s.sessionSize} min={5} max={104} step={5} onChange={(v) => set({ sessionSize: v })} /></div>
           <div className="row"><span className="row-text"><span>{t('newPerDay')}</span><small>{t('newPerDayDesc')}</small></span><Stepper value={s.newPerDay} min={0} max={52} onChange={(v) => set({ newPerDay: v })} /></div>
-          <label className="field">{t('perQuestion')}
+          <div className="field">{t('perQuestion')}
             <Segmented value={s.timePerQuestion} onChange={(v) => set({ timePerQuestion: v })} options={[{ value: 0, label: t('off') }, { value: 5, label: '5 s' }, { value: 10, label: '10 s' }, { value: 20, label: '20 s' }]} />
-          </label>
-          <label className="field">{t('method')}
+          </div>
+          <div className="field">{t('method')}
             <Segmented value={s.method} onChange={(v) => set({ method: v })} options={[{ value: 'images', label: t('methodImages') }, { value: 'palace', label: t('methodPalace') }, { value: 'rote', label: t('methodRote') }]} />
-          </label>
+          </div>
         </div>
 
         <div className="section-title">{t('reminders')}</div>

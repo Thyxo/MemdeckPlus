@@ -84,16 +84,16 @@ export function TrainSettingsSheet({ open, onClose }: { open: boolean; onClose: 
   return (
     <Sheet open={open} onClose={onClose} title={t('trainSettings')} footer={<button className="btn primary" onClick={onClose}>{t('done')}</button>}>
       <div className="stack-v">
-        <label className="field">{t('direction')}
+        <div className="field">{t('direction')}
           <Segmented value={s.direction} onChange={(v) => actions.setSettings({ direction: v })} options={[
             { value: 'c2p', label: t('dirC2PShort') }, { value: 'p2c', label: t('dirP2CShort') }, { value: 'both', label: t('dirBothShort') },
           ]} />
-        </label>
-        <label className="field">{t('perQuestion')}
+        </div>
+        <div className="field">{t('perQuestion')}
           <Segmented value={s.timePerQuestion} onChange={(v) => actions.setSettings({ timePerQuestion: v })} options={[
             { value: 0, label: t('off') }, { value: 5, label: '5 s' }, { value: 10, label: '10 s' }, { value: 20, label: '20 s' },
           ]} />
-        </label>
+        </div>
         <div className="row"><span>{t('sessionSize')}</span><Stepper value={s.sessionSize} min={5} max={104} step={5} onChange={(v) => actions.setSettings({ sessionSize: v })} /></div>
         <div className="row"><span className="row-text"><span>{t('newPerDay')}</span><small>{t('newPerDayDesc')}</small></span><Stepper value={s.newPerDay} min={0} max={52} onChange={(v) => actions.setSettings({ newPerDay: v })} /></div>
       </div>

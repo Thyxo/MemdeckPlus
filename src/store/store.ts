@@ -253,16 +253,6 @@ export const actions = {
       if (st) (day.mastery ??= {})[stackId] = stackMastery(d.srs[stackId], fullOrder(st));
     });
   },
-  /** Kun statistik (bruges i øvelser uden SRS-effekt, fx "hele rækkefølgen"). */
-  recordPractice(correct: number, total: number, ms: number) {
-    const today = ymd();
-    update((d) => {
-      const day = (d.days[today] ??= { answers: 0, correct: 0, ms: 0, sessions: 0 });
-      day.answers += total;
-      day.correct += correct;
-      day.ms += ms;
-    });
-  },
   finishSession() {
     const today = ymd();
     update((d) => {
