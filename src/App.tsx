@@ -121,12 +121,20 @@ export function App() {
     return () => offs.forEach((o) => o());
   }, [t]);
 
-  // PWA: service worker + "ny version"-besked
+  // PWA: opdaterer sig selv. Tjekker for ny version ved start, når appen kommer i forgrunden og hver halve time.
+  // En ny version tages i brug med det samme – undtagen midt i en træning/opsætning, hvor den venter til man går ud.
   useEffect(() => {
+    let pending = false;
+    const busy = () => /^#\/(train\/|learn\/build\/|tools\/(setup|lookup))/.test(location.hash);
+    const apply = () => { if (pending && !busy()) { pending = false; void update(true); } };
     const update = registerSW({
-      onNeedRefresh() {
-        const id = Date.now();
-        setToasts((x) => [...x, { id, text: t('updateAvailable'), action: { label: t('update'), run: () => update(true) } }]);
+      immediate: true,
+      onNeedRefresh() { pending = true; apply(); },
+      onRegisteredSW(_url, reg) {
+        if (!reg) return;
+        const check = () => { if (navigator.onLine) void reg.update().catch(() => {}); };
+        document.addEventListener('visibilitychange', () => document.visibilityState === 'visible' && check());
+        window.setInterval(check, 30 * 60_000);
       },
       onOfflineReady() {
         const id = Date.now();
@@ -134,6 +142,8 @@ export function App() {
         window.setTimeout(() => setToasts((x) => x.filter((y) => y.id !== id)), 3500);
       },
     });
+    window.addEventListener('hashchange', apply);
+    return () => window.removeEventListener('hashchange', apply);
   }, []); // registreres én gang
 
   // Påmindelser (Notification API) – tjekkes ved start og når appen kommer i forgrunden
@@ -158,7 +168,7 @@ export function App() {
         <nav className="bottomnav" aria-label={t('mainNav')}>
           {TABS.map((tab) => (
             <button key={tab.id} className={activeTab === tab.id ? 'on' : ''} aria-current={activeTab === tab.id ? 'page' : undefined}
-              onClick={() => { sfx.tap(); navigate(tab.path); }}>
+              onClick={() => { sfx.tap(); navigate(tab.path); window.scrollTo({ top: 0 }); }}>
               <Icon name={tab.icon} size={24} />
               <span>{t(tab.label)}</span>
             </button>

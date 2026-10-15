@@ -66,11 +66,10 @@
 }
 
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-/* App-følelse: siden selv står stille (ingen zoom, gummi-effekt eller sidelæns rykken) – kun indholdet scroller. */
-html, body { height: 100%; overflow: hidden; overscroll-behavior: none; touch-action: manipulation; }
-#root { height: 100%; }
+/* App-følelse: ingen zoom, gummi-effekt, sidelæns rykken eller tekstmarkering. */
+html, body { overflow-x: clip; overscroll-behavior: none; touch-action: manipulation; }
+html, body, #root { height: 100%; }
 body {
-  position: fixed; inset: 0;
   margin: 0;
   -webkit-user-select: none; user-select: none;
   -webkit-touch-callout: none;
@@ -103,14 +102,9 @@ small, .muted { color: var(--muted); }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 
 /* ---------- Layout ---------- */
-.app { position: absolute; inset: 0; display: flex; flex-direction: column; overflow: hidden; }
-.page-scroll {
-  flex: 1; min-height: 0;
-  overflow-x: hidden; overflow-y: auto;
-  overscroll-behavior: none;
-  -webkit-overflow-scrolling: touch;
-}
+.app { min-height: 100%; display: flex; flex-direction: column; }
 .page {
+  flex: 1;
   width: 100%;
   max-width: 760px;
   margin: 0 auto;
@@ -118,13 +112,13 @@ small, .muted { color: var(--muted); }
   animation: page-in .35s var(--ease);
 }
 /* Skærme uden topbar (træning, bidder): hold indholdet fri af statuslinjen/Dynamic Island. */
-.app > .page-scroll:first-child > .page { padding-top: calc(var(--safe-t) + 12px); }
+.app > .page:first-child { padding-top: calc(var(--safe-t) + 12px); }
 .page.wide { max-width: 1100px; }
 .page.full { padding-bottom: calc(var(--safe-b) + 16px); }
 @keyframes page-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
 .topbar {
-  position: relative; flex-shrink: 0; z-index: 20;
+  position: sticky; top: 0; z-index: 20;
   display: grid; grid-template-columns: 48px 1fr auto; align-items: center; gap: 4px;
   padding: calc(var(--safe-t) + 6px) 8px 6px;
   background: var(--bg);
@@ -393,7 +387,7 @@ textarea.input { min-height: 110px; resize: vertical; font-family: ui-monospace,
 .sheet-cols .sc-row b { width: 26px; text-align: right; color: var(--gold); font-variant-numeric: tabular-nums; }
 
 /* Opslag (performance): stor skrift, mørk */
-.perform { background: #000 !important; color: #e8e2cf; flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: none; }
+.perform { background: #000 !important; color: #e8e2cf; min-height: 100vh; min-height: 100dvh; }
 .perform .big-out { font-size: clamp(4rem, 22vw, 9rem); font-weight: 800; text-align: center; line-height: 1; font-variant-numeric: tabular-nums; }
 
 /* Stack-editor */
@@ -433,7 +427,7 @@ textarea.input { min-height: 110px; resize: vertical; font-family: ui-monospace,
 .badge small { font-size: .7rem; }
 
 /* Onboarding */
-.onb { height: 100%; overflow-y: auto; overscroll-behavior: none; display: flex; flex-direction: column; padding: calc(var(--safe-t) + 24px) 20px calc(var(--safe-b) + 20px); max-width: 520px; margin: 0 auto; }
+.onb { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; padding: calc(var(--safe-t) + 24px) 20px calc(var(--safe-b) + 20px); max-width: 520px; margin: 0 auto; }
 .onb-body { flex: 1; display: flex; flex-direction: column; gap: 16px; justify-content: center; animation: page-in .4s var(--ease); }
 .onb-dots { display: flex; gap: 6px; justify-content: center; margin: 16px 0; }
 .onb-dots span { width: 8px; height: 8px; border-radius: 4px; background: var(--surface-3); transition: width .3s; }

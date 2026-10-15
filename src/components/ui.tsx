@@ -26,11 +26,7 @@ export function TopBar({ title, backTo, right, sub }: { title: ReactNode; backTo
 }
 
 export function Page({ children, className }: { children: ReactNode; className?: string }) {
-  return (
-    <main className="page-scroll">
-      <div className={`page ${className ?? ''}`}>{children}</div>
-    </main>
-  );
+  return <main className={`page ${className ?? ''}`}>{children}</main>;
 }
 
 export function Sheet({ open, onClose, title, children, footer }: { open: boolean; onClose: () => void; title?: ReactNode; children: ReactNode; footer?: ReactNode }) {
