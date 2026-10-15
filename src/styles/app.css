@@ -1,4 +1,4 @@
-/* StackMaster – "casino-elegant": dyb grøn/navy, guldaccent. Mobil først. */
+/* Memdeck Plus – "casino-elegant": dyb grøn/navy, guldaccent. Mobil først. */
 
 :root {
   --font-ui: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -66,9 +66,15 @@
 }
 
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-html, body, #root { height: 100%; }
+/* App-følelse: siden selv står stille (ingen zoom, gummi-effekt eller sidelæns rykken) – kun indholdet scroller. */
+html, body { height: 100%; overflow: hidden; overscroll-behavior: none; touch-action: manipulation; }
+#root { height: 100%; }
 body {
+  position: fixed; inset: 0;
   margin: 0;
+  -webkit-user-select: none; user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-text-size-adjust: 100%;
   font-family: var(--font-ui);
   background: var(--bg);
   background-image: var(--felt);
@@ -77,8 +83,9 @@ body {
   font-size: 16px;
   line-height: 1.45;
   -webkit-font-smoothing: antialiased;
-  overscroll-behavior-y: none;
 }
+input, textarea, [contenteditable], .selectable { -webkit-user-select: text; user-select: text; -webkit-touch-callout: default; }
+img, svg { -webkit-user-drag: none; }
 button, input, select, textarea { font: inherit; color: inherit; }
 button { cursor: pointer; }
 button:disabled { cursor: default; opacity: .4; }
@@ -96,25 +103,31 @@ small, .muted { color: var(--muted); }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 
 /* ---------- Layout ---------- */
-.app { min-height: 100%; display: flex; flex-direction: column; }
+.app { position: absolute; inset: 0; display: flex; flex-direction: column; overflow: hidden; }
+.page-scroll {
+  flex: 1; min-height: 0;
+  overflow-x: hidden; overflow-y: auto;
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+}
 .page {
-  flex: 1;
   width: 100%;
   max-width: 760px;
   margin: 0 auto;
-  padding: 8px 16px calc(var(--nav-h) + var(--safe-b) + 24px);
+  padding: 8px max(16px, env(safe-area-inset-right)) calc(var(--nav-h) + var(--safe-b) + 24px) max(16px, env(safe-area-inset-left));
   animation: page-in .35s var(--ease);
 }
+/* Skærme uden topbar (træning, bidder): hold indholdet fri af statuslinjen/Dynamic Island. */
+.app > .page-scroll:first-child > .page { padding-top: calc(var(--safe-t) + 12px); }
 .page.wide { max-width: 1100px; }
 .page.full { padding-bottom: calc(var(--safe-b) + 16px); }
 @keyframes page-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
 .topbar {
-  position: sticky; top: 0; z-index: 20;
+  position: relative; flex-shrink: 0; z-index: 20;
   display: grid; grid-template-columns: 48px 1fr auto; align-items: center; gap: 4px;
   padding: calc(var(--safe-t) + 6px) 8px 6px;
-  background: color-mix(in srgb, var(--bg) 82%, transparent);
-  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  background: var(--bg);
   border-bottom: 1px solid var(--line-2);
 }
 .topbar-title { text-align: center; min-width: 0; }
@@ -136,8 +149,7 @@ small, .muted { color: var(--muted); }
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
   display: grid; grid-template-columns: repeat(5, 1fr);
   height: calc(var(--nav-h) + var(--safe-b)); padding-bottom: var(--safe-b);
-  background: color-mix(in srgb, var(--bg-2) 90%, transparent);
-  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  background: var(--bg-2);
   border-top: 1px solid var(--line);
 }
 .bottomnav button {
@@ -366,9 +378,9 @@ textarea.input { min-height: 110px; resize: vertical; font-family: ui-monospace,
 @media (max-width: 520px) { .tap-grid { grid-template-columns: repeat(13, minmax(0, 1fr)); gap: 2px; } }
 
 /* Heatmap 4×13 */
-.heatmap { display: grid; grid-template-columns: 26px repeat(13, 1fr); gap: 3px; }
+.heatmap { display: grid; grid-template-columns: 18px repeat(13, minmax(0, 1fr)); gap: 3px; }
 .heatmap .hm-cell.unseen { color: var(--muted); }
-.heatmap .hm-cell { aspect-ratio: 1; border-radius: 6px; border: 0; display: grid; place-items: center; font-size: .62rem; font-weight: 800; color: rgba(0,0,0,.75); padding: 0; min-height: 22px; }
+.heatmap .hm-cell { aspect-ratio: 1; border-radius: 6px; border: 0; display: grid; place-items: center; font-size: clamp(.5rem, 2.6vw, .7rem); font-weight: 800; color: rgba(0,0,0,.75); padding: 0; min-width: 0; }
 .heatmap .hm-label { display: grid; place-items: center; font-size: .7rem; color: var(--muted); }
 
 /* ---------- Tabeller / cheat sheets ---------- */
@@ -381,7 +393,7 @@ textarea.input { min-height: 110px; resize: vertical; font-family: ui-monospace,
 .sheet-cols .sc-row b { width: 26px; text-align: right; color: var(--gold); font-variant-numeric: tabular-nums; }
 
 /* Opslag (performance): stor skrift, mørk */
-.perform { background: #000 !important; color: #e8e2cf; min-height: 100vh; }
+.perform { background: #000 !important; color: #e8e2cf; flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: none; }
 .perform .big-out { font-size: clamp(4rem, 22vw, 9rem); font-weight: 800; text-align: center; line-height: 1; font-variant-numeric: tabular-nums; }
 
 /* Stack-editor */
@@ -421,7 +433,7 @@ textarea.input { min-height: 110px; resize: vertical; font-family: ui-monospace,
 .badge small { font-size: .7rem; }
 
 /* Onboarding */
-.onb { min-height: 100vh; display: flex; flex-direction: column; padding: calc(var(--safe-t) + 24px) 20px calc(var(--safe-b) + 20px); max-width: 520px; margin: 0 auto; }
+.onb { height: 100%; overflow-y: auto; overscroll-behavior: none; display: flex; flex-direction: column; padding: calc(var(--safe-t) + 24px) 20px calc(var(--safe-b) + 20px); max-width: 520px; margin: 0 auto; }
 .onb-body { flex: 1; display: flex; flex-direction: column; gap: 16px; justify-content: center; animation: page-in .4s var(--ease); }
 .onb-dots { display: flex; gap: 6px; justify-content: center; margin: 16px 0; }
 .onb-dots span { width: 8px; height: 8px; border-radius: 4px; background: var(--surface-3); transition: width .3s; }
@@ -442,7 +454,7 @@ textarea.input { min-height: 110px; resize: vertical; font-family: ui-monospace,
 .card-img.lg { width: 96px; height: 96px; font-size: 3rem; border-radius: 18px; }
 
 /* Grafer */
-.chart { width: 100%; height: auto; display: block; }
+.chart { width: 100%; height: auto; display: block; overflow: visible; }
 .chart text { fill: var(--muted); font-size: 10px; }
 
 .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }

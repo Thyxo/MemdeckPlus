@@ -37,5 +37,5 @@ export function maybeRemind() {
   const done = s.days[today]?.answers ?? 0;
   update((d) => { d.lastReminder = today; });
   if (done >= s.settings.dailyGoal) return;
-  showNotification('StackMaster', t('reminderBody', { n: s.settings.dailyGoal - done }));
+  showNotification('Memdeck Plus', t('reminderBody', { n: s.settings.dailyGoal - done }));
 }

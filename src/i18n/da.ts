@@ -11,7 +11,7 @@ export const da = {
   time: 'Tid', today: 'I dag', move: 'Flyt', moveUp: 'Flyt op', moveDown: 'Flyt ned', update: 'Opdatér',
   suitS: 'Spar', suitH: 'Hjerter', suitC: 'Klør', suitD: 'Ruder',
   typePosition: 'Tast position', pickACard: 'Vælg et kort', typeNumber: 'Tast et tal',
-  updateAvailable: 'Ny version klar', offlineReady: 'StackMaster virker nu offline', offlineReadyShort: 'virker offline',
+  updateAvailable: 'Ny version klar', offlineReady: 'Memdeck Plus virker nu offline', offlineReadyShort: 'virker offline',
   storageFull: 'Lageret er fuldt – eksportér og ryd fotos', badgeUnlocked: 'Ny milepæl',
 
   // Stacks / bibliotek
@@ -178,11 +178,11 @@ export const da = {
   backupSaved: 'Backup gemt', backupRestored: 'Backup indlæst ✅', resetProgress: 'Nulstil fremskridt', resetProgressQ: 'Nulstil al træning?',
   resetProgressBody: 'Stacks, billeder og ruter bevares. Statistik, bokse og milepæle slettes.', progressReset: 'Fremskridt nulstillet',
   resetAll: 'Slet alt', resetAllQ: 'Slet ALLE data?', resetAllBody: 'Alt slettes permanent – også egne stacks og fotos.',
-  about: 'Om', aboutText: 'StackMaster hjælper dig med at lære og bruge memorerede kortspil. Mnemonica © Juan Tamariz – rækkefølgen bruges som reference. Kortdesign er tegnet til appen.',
+  about: 'Om', aboutText: 'Memdeck Plus hjælper dig med at lære og bruge memorerede kortspil. Mnemonica © Juan Tamariz – rækkefølgen bruges som reference. Kortdesign er tegnet til appen.',
   showOnboarding: 'Vis introduktion igen',
 
   // Onboarding
-  onbWelcome: 'Velkommen til StackMaster', onbWelcomeText: 'Lær et memoreret kortspil udenad – og brug det i dine tricks.',
+  onbWelcome: 'Velkommen til Memdeck Plus', onbWelcomeText: 'Lær et memoreret kortspil udenad – og brug det i dine tricks.',
   onbChooseStack: 'Vælg din stack', onbOtherStack: 'En anden stack', onbOtherStackDesc: 'Aronson, Redford, Si Stebbins eller din egen',
   onbMethod: 'Hvordan vil du lære?', onbMethodText: 'Du kan altid skifte og kombinere metoderne.',
   methodImagesDesc: 'Hvert kort får et billede, og billederne bindes sammen i historier.',

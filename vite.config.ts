@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
-// StackMaster – Vite + React + PWA (Workbox generateSW).
+// Memdeck Plus – Vite + React + PWA (Workbox generateSW).
 // Alt (JS, CSS, fonte, ikoner) precaches, så appen virker 100 % offline.
 export default defineConfig({
   plugins: [
@@ -13,8 +13,8 @@ export default defineConfig({
       includeAssets: ['icons/*.png', 'icons/*.svg', 'favicon.svg'],
       manifest: {
         id: '/',
-        name: 'StackMaster',
-        short_name: 'StackMaster',
+        name: 'Memdeck Plus',
+        short_name: 'Memdeck Plus',
         description: 'Lær, husk og brug memorerede kortspil (Mnemonica m.fl.)',
         lang: 'da',
         start_url: '/',

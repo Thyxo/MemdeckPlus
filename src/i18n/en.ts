@@ -12,7 +12,7 @@ export const en: Record<keyof typeof da, string> = {
   time: 'Time', today: 'Today', move: 'Move', moveUp: 'Move up', moveDown: 'Move down', update: 'Update',
   suitS: 'Spades', suitH: 'Hearts', suitC: 'Clubs', suitD: 'Diamonds',
   typePosition: 'Enter position', pickACard: 'Pick a card', typeNumber: 'Enter a number',
-  updateAvailable: 'New version ready', offlineReady: 'StackMaster now works offline', offlineReadyShort: 'works offline',
+  updateAvailable: 'New version ready', offlineReady: 'Memdeck Plus now works offline', offlineReadyShort: 'works offline',
   storageFull: 'Storage is full – export and remove photos', badgeUnlocked: 'New milestone',
 
   activeStack: 'Active stack', incomplete: 'incomplete', active: 'Active', useStack: 'Use this stack', builtIn: 'Built-in',
@@ -172,10 +172,10 @@ export const en: Record<keyof typeof da, string> = {
   backupSaved: 'Backup saved', backupRestored: 'Backup restored ✅', resetProgress: 'Reset progress', resetProgressQ: 'Reset all training?',
   resetProgressBody: 'Stacks, images and routes are kept. Statistics, boxes and milestones are deleted.', progressReset: 'Progress reset',
   resetAll: 'Delete everything', resetAllQ: 'Delete ALL data?', resetAllBody: 'Everything is deleted permanently – including custom stacks and photos.',
-  about: 'About', aboutText: 'StackMaster helps you learn and use memorized decks. Mnemonica © Juan Tamariz – the order is used as a reference. Card designs are drawn for the app.',
+  about: 'About', aboutText: 'Memdeck Plus helps you learn and use memorized decks. Mnemonica © Juan Tamariz – the order is used as a reference. Card designs are drawn for the app.',
   showOnboarding: 'Show introduction again',
 
-  onbWelcome: 'Welcome to StackMaster', onbWelcomeText: 'Memorize a stacked deck – and use it in your tricks.',
+  onbWelcome: 'Welcome to Memdeck Plus', onbWelcomeText: 'Memorize a stacked deck – and use it in your tricks.',
   onbChooseStack: 'Choose your stack', onbOtherStack: 'Another stack', onbOtherStackDesc: 'Aronson, Redford, Si Stebbins or your own',
   onbMethod: 'How do you want to learn?', onbMethodText: 'You can always switch and combine methods.',
   methodImagesDesc: 'Each card gets an image, and the images are linked into stories.',

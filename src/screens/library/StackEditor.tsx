@@ -149,20 +149,28 @@ function SortableSlots({ stack, locked, onChange, dupes }: { stack: Stack; locke
 
   const used = useMemo(() => new Set(order.filter(Boolean) as CardId[]), [order]);
 
+  const scroller = () => listRef.current?.closest('.page-scroll') as HTMLElement | null;
+  const scrollTop = () => scroller()?.scrollTop ?? 0;
+
   const onDown = (e: RPointerEvent, idx: number) => {
     if (locked) return;
     (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
     const first = listRef.current?.firstElementChild as HTMLElement | null;
     if (first) rowH.current = first.offsetHeight + 6;
     sfx.tap();
-    setDrag({ idx, startY: e.pageY, dy: 0 });
+    setDrag({ idx, startY: e.clientY + scrollTop(), dy: 0 });
   };
   const onMove = (e: RPointerEvent) => {
     if (!drag) return;
-    // Auto-scroll nær kanten
-    if (e.clientY < 90) window.scrollBy(0, -14);
-    else if (e.clientY > window.innerHeight - 90) window.scrollBy(0, 14);
-    const pageY = e.clientY + window.scrollY;
+    // Auto-scroll nær kanten (indholdet scroller i .page-scroll, ikke vinduet)
+    const sc = scroller();
+    if (sc) {
+      const r = sc.getBoundingClientRect();
+      const bottom = Math.min(r.bottom, document.querySelector('.bottomnav')?.getBoundingClientRect().top ?? r.bottom);
+      if (e.clientY < r.top + 60) sc.scrollTop -= 14;
+      else if (e.clientY > bottom - 60) sc.scrollTop += 14;
+    }
+    const pageY = e.clientY + scrollTop();
     let dy = pageY - drag.startY;
     let idx = drag.idx;
     let startY = drag.startY;

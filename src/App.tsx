@@ -158,7 +158,7 @@ export function App() {
         <nav className="bottomnav" aria-label={t('mainNav')}>
           {TABS.map((tab) => (
             <button key={tab.id} className={activeTab === tab.id ? 'on' : ''} aria-current={activeTab === tab.id ? 'page' : undefined}
-              onClick={() => { sfx.tap(); navigate(tab.path); window.scrollTo({ top: 0 }); }}>
+              onClick={() => { sfx.tap(); navigate(tab.path); }}>
               <Icon name={tab.icon} size={24} />
               <span>{t(tab.label)}</span>
             </button>

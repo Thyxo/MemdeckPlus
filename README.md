@@ -1,7 +1,7 @@
-# StackMaster ♠
+# Memdeck Plus ♠
 
 Mobil-first PWA til at **lære, huske og bruge memorerede kortspil** (stacks) i korttricks.
-Installérbar på hjemmeskærmen, virker 100 % offline, al data lokalt på enheden. Dansk (standard) og engelsk.
+Live: **https://memdeckplus.vercel.app** · Installérbar på hjemmeskærmen, virker 100 % offline, al data lokalt på enheden. Dansk (standard) og engelsk.
 
 **Teknik:** React 19 + TypeScript + Vite 8 + `vite-plugin-pwa` (Workbox). Ingen backend.
 Data i `localStorage` (state) og IndexedDB (fotos).
@@ -64,6 +64,7 @@ session-størrelse, nye kort pr. dag, tid pr. spørgsmål, metode, daglige påmi
 eksport/import af fuld backup (inkl. fotos), nulstil fremskridt, slet alt. Onboarding på 3 skærme første gang.
 
 ### Kvalitet
+- App-følelse: fast topbar og bundmenu, kun indholdet scroller; ingen knib-zoom, dobbelttryk-zoom, gummi-effekt, sidelæns rykken eller tekstmarkering (undtagen i inputfelter). Respekterer notch/Dynamic Island (safe-area).
 - Egne SVG-kort og kulør-stier (ingen ophavsretsbeskyttet grafik; ♥/♦ vises aldrig som emoji).
 - Store trykflader (≥ 44 px), tastaturstøtte, `aria`-labels, `prefers-reduced-motion`.
 - Fejlhåndtering: offline-billedsøgning, CORS-fallback, fuldt lager, ugyldige filer.

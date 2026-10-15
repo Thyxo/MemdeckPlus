@@ -23,7 +23,7 @@ export function CheatSheets() {
   const savePng = async () => {
     setBusy(true);
     try {
-      const sub = `StackMaster · ${new Date().toLocaleDateString(state.settings.lang === 'da' ? 'da-DK' : 'en-GB')}`;
+      const sub = `Memdeck Plus · ${new Date().toLocaleDateString(state.settings.lang === 'da' ? 'da-DK' : 'en-GB')}`;
       const blob = view === 'list' ? await renderListPng(stack.name, order, danish, sub) : await renderGridPng(stack.name, order, danish, sub);
       downloadFile(`${safeFileName(stack.name)}-${view}.png`, blob, 'image/png');
     } catch {

@@ -35,7 +35,7 @@ export function Home() {
       <header className="topbar" style={{ gridTemplateColumns: '1fr auto' }}>
         <div className="stack-h" style={{ gap: 8, paddingLeft: 8 }}>
           <svg width="28" height="28" viewBox="0 0 64 64" aria-hidden="true"><rect x="8" y="4" width="40" height="54" rx="6" fill="var(--gold)" transform="rotate(-10 28 31)" /><rect x="16" y="6" width="40" height="54" rx="6" fill="var(--surface)" stroke="var(--gold)" strokeWidth="3" /><path d="M36 16 C40 24 50 28 50 36 C50 41 46 44 42 44 C39 44 37 42 36 40 C36 44 38 47 41 49 L31 49 C34 47 36 44 36 40 C35 42 33 44 30 44 C26 44 22 41 22 36 C22 28 32 24 36 16Z" fill="var(--gold)" /></svg>
-          <h1 className="display" style={{ fontSize: '1.35rem' }}>StackMaster</h1>
+          <h1 className="display" style={{ fontSize: '1.35rem' }}>Memdeck <span className="gold">Plus</span></h1>
         </div>
         <div className="topbar-right">
           <button className="icon-btn" onClick={() => navigate('/stats')} aria-label={t('stats')}><Icon name="stats" /></button>

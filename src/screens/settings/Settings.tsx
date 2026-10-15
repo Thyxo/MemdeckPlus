@@ -18,7 +18,7 @@ export function SettingsScreen() {
     if (on) {
       const ok = await requestNotificationPermission();
       if (!ok) { emit('toast', 'notifDenied'); return; }
-      showNotification('StackMaster', t('remindersOnTest'));
+      showNotification('Memdeck Plus', t('remindersOnTest'));
     }
     set({ reminders: { ...s.reminders, enabled: on } });
   };
@@ -95,7 +95,7 @@ export function SettingsScreen() {
         <div className="card flat stack-v">
           <small className="muted">{t('aboutText')}</small>
           <button className="btn ghost" onClick={() => set({ onboarded: false })}>{t('showOnboarding')}</button>
-          <small className="muted center">StackMaster v1.0 · {t('offlineReadyShort')}</small>
+          <small className="muted center">Memdeck Plus v1.1 · {t('offlineReadyShort')}</small>
         </div>
       </Page>
     </>

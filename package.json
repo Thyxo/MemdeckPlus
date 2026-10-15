@@ -1,9 +1,9 @@
 {
-  "name": "stackmaster",
+  "name": "memdeckplus",
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "StackMaster – lær, husk og brug memorerede kortspil (PWA)",
+  "description": "Memdeck Plus – lær, husk og brug memorerede kortspil (PWA)",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

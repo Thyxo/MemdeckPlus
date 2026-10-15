@@ -16,7 +16,7 @@ export async function exportBackup() {
   let photos: Photo[] = [];
   try { photos = await allPhotos(); } catch { /* ingen fotos */ }
   const data: Backup = { type: 'stackmaster-backup', version: 1, exportedAt: new Date().toISOString(), state: getState(), photos };
-  downloadFile(`stackmaster-backup-${ymd()}.json`, JSON.stringify(data));
+  downloadFile(`memdeckplus-backup-${ymd()}.json`, JSON.stringify(data));
 }
 
 /** Returnerer antal stacks i den importerede backup. Kaster ved ugyldig fil. */
