@@ -68,7 +68,10 @@
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 /* App-følelse: ingen zoom, gummi-effekt, sidelæns rykken eller tekstmarkering. */
 html, body { overflow-x: clip; overscroll-behavior: none; touch-action: manipulation; }
-html, body, #root { height: 100%; }
+/* iOS-hjemmeskærm med gennemsigtig statuslinje regner skærmen for kortere med statuslinjens højde,
+   så faste elementer (bundmenuen) løftes på korte sider. Siden gøres mindst lige så meget højere. */
+html { height: calc(100% + env(safe-area-inset-top, 0px)); }
+body, #root { height: 100%; }
 body {
   margin: 0;
   -webkit-user-select: none; user-select: none;
